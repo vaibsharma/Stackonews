@@ -91,7 +91,7 @@ class fb(generic.View):
 
 def chat(fbid,message):
 	flag = 1 
-	for name in GREETINGS.keys()[:15]:
+	for name in GREETINGS.keys():
 		if name in message.lower() :
 			flag = 0
 			post_facebook_message(fbid,reply[GREETINGS[name]])
@@ -147,19 +147,21 @@ def news(fbid,message):
 			try :
 				result = requests.get("https://newsapi.org/v1/sources?source=techcrunch&language=en&apikey="+API_KEY).json()
 				categ = news_category[category]
+				print categ
 				news_result = result['sources']
 				for xa in news_result:
-					if xa['category'] is categ :
+					if xa['category'] == categ :
 						post_facebook_message(fbid,xa['description'])
 						return
-			except ConnectionError :
-				post_facebook_message(fbid,"Sorry! which news category you want (please mention it with the suffix news) Thank you!")
 			except :
-				print "\s\s\s" %('*'*10+'\n',"Could not connect with the news API\n","'*'*10+'\n'")
+				try:
+					post_facebook_message(fbid,"Sorry! which news category you want (please mention it with the suffix news) Thank you!")
+				except :
+					print "%s%s%s" %('*'*10+'\n',"Could not connect with the news API\n","'*'*10+'\n'")
 			return 
 
 	if flag == 1:
 		try :
 			post_facebook_message(fbid,"Please try giving me the news category")
 		except:
-			print "\s\s\s" %('*'*10+'\n',"Could not connect with the news API\n","'*'*10+'\n'")
+			print "%s%s%s" %('*'*10+'\n',"Could not connect with the news API\n","'*'*10+'\n'")
