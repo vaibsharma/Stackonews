@@ -151,6 +151,9 @@ def news(fbid,message):
 				news_result = result['sources']
 				for xa in news_result:
 					if xa['category'] == categ :
+						if xa['description'] is None:
+							post_facebook_message(fbid,"Sorry! which news category you want (please mention it with the suffix news) Thank you!")
+
 						post_facebook_message(fbid,xa['description'])
 						return
 			except :
