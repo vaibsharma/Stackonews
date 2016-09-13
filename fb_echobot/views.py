@@ -111,7 +111,9 @@ def chat(fbid,message):
 			if "http://stackoverflow.com/" in url:
 				print "entered"
 				soverflowurl = url
-				break 
+			elif "http://youtube.com/" in url:
+				videos(fbid,url)
+				return
 			else :
 				continue	
 
@@ -153,8 +155,9 @@ def news(fbid,message):
 					if xa['category'] == categ :
 						if xa['description'] is None:
 							post_facebook_message(fbid,"Sorry! which news category you want (please mention it with the suffix news) Thank you!")
+							return
 
-						post_facebook_message(fbid,xa['description'])
+						post_facebook_template_message(fbid,xa['description'],xa['country'],xa['urlsToLogo']['medium'],xa['category'],xa['urls'])
 						return
 			except :
 				try:
@@ -168,3 +171,67 @@ def news(fbid,message):
 			post_facebook_message(fbid,"Please try giving me the news category")
 		except:
 			print "%s%s%s" %('*'*10+'\n',"Could not connect with the news API\n","'*'*10+'\n'")
+
+def post_facebook_template_message(fbid,description,country,logo,category,urls):
+	response_msg1 = json.dumps(
+        {"recipient":{"id":fbid}, 
+            "message":{
+            "attachment":{
+            "type":"template",
+            "payload":{
+            "template_type":"generic",
+            "elements":[
+            	{
+            		"title":category + " " +country,
+           			"item_url":urls,
+            		"image_url":logo,
+            		"subtitle":description,
+            		"buttons":[
+                 	{
+                    	"type":"web_url",
+                    	"url":urls,
+           	 			"title":"View Website"
+                 	},
+              		{
+                		"type":"postback",
+                		"title":"Start Chatting",
+                		"payload":"DEVELOPER_DEFINED_PAYLOAD"
+              		}              
+       				]
+          		}
+        	]
+      	}
+    }
+  }
+})
+	post_message_url = 'https://graph.facebook.com/v2.6/me/messages?access_token=%s'%PAGE_ACCESS_TOKEN
+	try :
+		status1 = requests.post(post_message_url, headers={"Content-Type": "application/json"},data=response_msg1)
+		pprint(status1.json())
+	except :
+		try :
+			post_facebook_message(fbid,description)
+		except :
+			print "%s%s%s" %('*'*10+'\n',"Message was not send!",'*'*10+'\n')
+
+def videos(fbid,url):
+	response_msg1 = json.dumps(
+        {"recipient":{"id":fbid}, 
+            "message":{
+    "attachment":{
+      "type":"video",
+      "payload":{
+        "url":url}
+    }
+  }
+})
+	post_message_url = 'https://graph.facebook.com/v2.6/me/messages?access_token=%s'%PAGE_ACCESS_TOKEN
+	try :
+		status1 = requests.post(post_message_url, headers={"Content-Type": "application/json"},data=response_msg1)
+		pprint(status1.json())
+	except :
+		try :
+			post_facebook_message(fbid,"Please brief your choice!")
+		except :
+			print "%s%s%s" %('*'*10+'\n',"Message was not send!",'*'*10+'\n')
+
