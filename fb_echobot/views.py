@@ -223,21 +223,21 @@ def post_facebook_template_message(fbid,description,country,logo,category,urls):
 			print "NOTHING HAS WORKED OUT"
 			print "%s%s%s" %('*'*10+'\n',"Message was not send!",'*'*10+'\n')
 
-def videos(fbid,url):
+def videos(fbid,url="https://www.youtube.com/v/ej3ebj3F"):
 	print "************\nEntered inside the videos\n************"
 	url = url +"\n"
 	url = url.decode('utf-8')
 	p = re.compile(ur'^https:\/\/www.youtube.com\/watch\?(?P<digit>\w+)=(?P<first_name>[0-9a-zA-Z]+)$')
 	result = re.search(p, url)
-	new_url = "https://www.youtube.com/"+str(result.group('digit')+"/"+str(result.group('first_name').decode('utf-8'))
-	print new_url.decode('utf-8')
+	newURL = "https://www.youtube.com/"+str(result.group('digit').decode('utf-8'))+"/"+str(result.group('first_name').decode('utf-8'))
+	print newURL
 	response_msg1 = json.dumps(
         {"recipient":{"id":fbid}, 
             "message":{
     "attachment":{
       "type":"video",
       "payload":{
-        "url":new_url}
+        "url":newURL}
     }
   }
 })
