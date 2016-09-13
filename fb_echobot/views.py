@@ -173,6 +173,7 @@ def news(fbid,message):
 			print "%s%s%s" %('*'*10+'\n',"Could not connect with the news API\n","'*'*10+'\n'")
 
 def post_facebook_template_message(fbid,description,country,logo,category,urls):
+	print "post_facebbok_template_message()"
 	response_msg1 = json.dumps(
         {"recipient":{"id":fbid}, 
             "message":{
@@ -185,7 +186,7 @@ def post_facebook_template_message(fbid,description,country,logo,category,urls):
             		"title":category,
            			"item_url":urls,
             		"image_url":logo,
-            		"subtitle":description,
+            		"subtitle":description[:250],
             		"buttons":[
                  	{
                     	"type":"web_url",
@@ -201,15 +202,20 @@ def post_facebook_template_message(fbid,description,country,logo,category,urls):
 })
 	post_message_url = 'https://graph.facebook.com/v2.6/me/messages?access_token=%s'%PAGE_ACCESS_TOKEN
 	try :
+		print "**********\n TRYING NEWS TEMPLATE ***********\n"
 		status1 = requests.post(post_message_url, headers={"Content-Type": "application/json"},data=response_msg1)
 		pprint(status1.json())
 	except :
+		print "NEWS TEMPLATE FAILED"
 		try :
+			print "POSTING DESCRIPTION NOT TEMPLATE"
 			post_facebook_message(fbid,description)
 		except :
+			print "NOTHING HAS WORKED OUT"
 			print "%s%s%s" %('*'*10+'\n',"Message was not send!",'*'*10+'\n')
 
 def videos(fbid,url):
+	print "************\nEntered inside the videos\n************"
 	response_msg1 = json.dumps(
         {"recipient":{"id":fbid}, 
             "message":{
@@ -222,11 +228,14 @@ def videos(fbid,url):
 })
 	post_message_url = 'https://graph.facebook.com/v2.6/me/messages?access_token=%s'%PAGE_ACCESS_TOKEN
 	try :
+		print "trying video message"
 		status1 = requests.post(post_message_url, headers={"Content-Type": "application/json"},data=response_msg1)
 		pprint(status1.json())
 	except :
 		try :
+			print "************ VIDEO WAS NOT SEND ************"
 			post_facebook_message(fbid,"Please brief your choice!")
 		except :
+			print "EVERYTHING HAS FAILED MESSAGE WAS NOT SEND"
 			print "%s%s%s" %('*'*10+'\n',"Message was not send!",'*'*10+'\n')
 
