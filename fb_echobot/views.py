@@ -159,7 +159,7 @@ def news(fbid,message):
 							post_facebook_message(fbid,"Sorry!   which news category you want (please mention it with the suffix news) Thank you!")
 							return
 
-						post_facebook_template_message(fbid,xa['description'],xa['country'],xa['urlsToLogo']['medium'],xa['category'],xa['urls'])
+						post_facebook_template_message(fbid,xa['description'],xa['country'],xa['urlsToLogos']['medium'],xa['category'],xa['urls'])
 						return
 			except :
 				print "template not send"
