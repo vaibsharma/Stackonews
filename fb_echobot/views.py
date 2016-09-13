@@ -152,8 +152,13 @@ def news(fbid,message):
 				news_result = result['sources']
 				for xa in news_result:
 					if xa['category'] == categ :
+						print xa['description']
 						if len(xa['description']) == 0:
-							post_facebook_message(fbid,"Sorry!   which news category you want (please mention it with the suffix news) Thank you!")
+							try :
+								post_facebook_message(fbid,"Sorry!   which news category you want (please mention it with the suffix news) Thank you!")
+
+							except:
+								print "No response"	
 							return
 
 						print "Checking all the inputs"	
@@ -177,6 +182,7 @@ def news(fbid,message):
 def post_facebook_template_message(fbid,description,country,logo,category,urls):
 
 	print "*************** post_facebbok_template_message() ***********"
+
 	response_msg1 = json.dumps(
         {"recipient":{"id":fbid}, 
             "message":{
@@ -223,7 +229,7 @@ def videos(fbid,url):
 	url = url.decode('utf-8')
 	p = re.compile(ur'^https:\/\/www.youtube.com\/watch\?(?P<digit>\w+)=(?P<first_name>[0-9a-zA-Z]+)$')
 	result = re.search(p, url)
-	new_url = "https://www.youtube.com/e/"+str(result.group('first_name').decode('utf-8'))
+	new_url = "https://www.youtube.com/"+str(result.group('digit')+"/"+str(result.group('first_name').decode('utf-8'))
 	print new_url
 	response_msg1 = json.dumps(
         {"recipient":{"id":fbid}, 
