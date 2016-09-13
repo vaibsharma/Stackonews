@@ -159,6 +159,8 @@ def news(fbid,message):
 							post_facebook_message(fbid,"Sorry!   which news category you want (please mention it with the suffix news) Thank you!")
 							return
 
+						print "Checking all the inputs"	
+						print xa['description'],xa['country'],xa['urlsToLogos']['medium'],xa['category'],xa['urls']	
 						post_facebook_template_message(fbid,xa['description'],xa['country'],xa['urlsToLogos']['medium'],xa['category'],xa['urls'])
 						return
 			except :
