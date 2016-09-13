@@ -18,6 +18,7 @@ API_KEY = "00ed9d0a7061428493500c5d9bfb223e"
 PAGE_ACCESS_TOKEN = 'EAAIhB7QbAeEBAH0xBOZBSGX1mb0Gg0wMbiVZCEQuzAcXYgfpobDhgQ6EfK4pLwVoUn5vCfZCM6cCZCGgyOBjSGaBzNb6zDmVdZAaFx7ai2qCXmJswWw7tmxyUqnAyKCmw3Ga2dZCqTHyevArZA11dMuEI46xI3lRww3ZBHdoKOifoAZDZD'
 VERIFY_TOKEN = "vaibhavsharma"
 
+
 GREETINGS = {"name":1,"nice":0,"ok":0,"thank":0,"how are you":2,"fine":3,"talk":4,"hi":5,"hey":5,"hello":5,"afternoon":6,"morning":7,"night":8,"hafiz":9,"doing":10,"pokemon":11,"are smart":12,"no":13}
 reply=["My Pleasure My Master","My name is Stacko ! can answer all your tech question.","I am Fine my master. How are you ?","Okkay! if you need any help you just need to drop a message my master \n Khuda Hafiz! :)","Master you will only ask me tech questions","Hi :)","Good afternoon! My master :)","Good morning! My master","Good night! My master :)","khuda hafiz :)",">Sitting>Eating\n>Staring at the laptop screen\n>Typing\n>Breathing\n>Blinking\n>Thinking\nLol\nHow about you? ;) ","This might help you ! Made by my master :) http://enigmatic-basin-68757.herokuapp.com just give it a try . ","Thank you master ! this made my day :)","okkay ! then ?"]
 news_category = {'bollywood':'entertainment','film ':'entertainment','business':'buisness','market n':'buisness', 'entertainment':'entertainment', 'gam':'gaming', 'general new':'general','normal n':'general', 'science-and-nature':'science-and-nature','science':'science-and-nature','nature':'science-and-nature', 'sport':'sports','play':'sports', 'technology':'technology','gadgets':'technology','mobile':'technology'}
@@ -216,13 +217,18 @@ def post_facebook_template_message(fbid,description,country,logo,category,urls):
 
 def videos(fbid,url):
 	print "************\nEntered inside the videos\n************"
+	url = url +"\n"
+	url = url.decode('utf-8')
+	p = re.compile(ur'^https:\/\/www.youtube.com\/watch\?(?P<digit>\w+)=(?P<first_name>[0-9a-zA-Z]+)$')
+	result = re.search(p, url)
+	new_url = "https://www.youtube.com/"+ str(result.group('digit').decode('utf-8')) + "/"+str(result.group('first_name').decode('utf-8'))
 	response_msg1 = json.dumps(
         {"recipient":{"id":fbid}, 
             "message":{
     "attachment":{
       "type":"video",
       "payload":{
-        "url":url}
+        "url":new_url}
     }
   }
 })
