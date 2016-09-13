@@ -143,11 +143,12 @@ def chat(fbid,message):
 				post_facebook_message(fbid,"Try giving me the exact problem! My master!")	
 
 def news(fbid,message):
-	flag = 1
+	print "ENTER in THE NEWS FUNCTION\n"
 	for category in news_category.keys():
 		if category in message :
 			flag = 0
 			try :
+				print "Getting inside the try of news"
 				result = requests.get("https://newsapi.org/v1/sources?source=techcrunch&language=en&apikey="+API_KEY).json()
 				categ = news_category[category]
 				print categ
@@ -155,12 +156,13 @@ def news(fbid,message):
 				for xa in news_result:
 					if xa['category'] == categ :
 						if xa['description'] is None:
-							post_facebook_message(fbid,"Sorry! which news category you want (please mention it with the suffix news) Thank you!")
+							post_facebook_message(fbid,"Sorry!   which news category you want (please mention it with the suffix news) Thank you!")
 							return
 
 						post_facebook_template_message(fbid,xa['description'],xa['country'],xa['urlsToLogo']['medium'],xa['category'],xa['urls'])
 						return
 			except :
+				print "template not send"
 				try:
 					post_facebook_message(fbid,"Sorry! which news category you want (please mention it with the suffix news) Thank you!")
 				except :
@@ -174,7 +176,8 @@ def news(fbid,message):
 			print "%s%s%s" %('*'*10+'\n',"Could not connect with the news API\n","'*'*10+'\n'")
 
 def post_facebook_template_message(fbid,description,country,logo,category,urls):
-	print "post_facebbok_template_message()"
+
+	print "*************** post_facebbok_template_message() ***********"
 	response_msg1 = json.dumps(
         {"recipient":{"id":fbid}, 
             "message":{
@@ -184,14 +187,14 @@ def post_facebook_template_message(fbid,description,country,logo,category,urls):
             "template_type":"generic",
             "elements":[
             	{
-            		"title":category,
-           			"item_url":urls,
-            		"image_url":logo,
-            		"subtitle":description[:250],
+            		"title":category.decode('utf-8'),
+           			"item_url":urls.decode('utf-8'),
+            		"image_url":logo.decode('utf-8'),
+            		"subtitle":description.decode('utf-8')[:250],
             		"buttons":[
                  	{
                     	"type":"web_url",
-                    	"url":urls,
+                    	"url":urls.decode('utf-8'),
            	 			"title":"View Website"
                  	}             
        				]
@@ -221,7 +224,7 @@ def videos(fbid,url):
 	url = url.decode('utf-8')
 	p = re.compile(ur'^https:\/\/www.youtube.com\/watch\?(?P<digit>\w+)=(?P<first_name>[0-9a-zA-Z]+)$')
 	result = re.search(p, url)
-	new_url = "https://www.youtube.com/"+ str(result.group('digit').decode('utf-8')) + "/"+str(result.group('first_name').decode('utf-8'))
+	new_url = "https://www.youtube.com/e/"+str(result.group('first_name').decode('utf-8'))
 	response_msg1 = json.dumps(
         {"recipient":{"id":fbid}, 
             "message":{
