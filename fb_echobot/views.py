@@ -111,7 +111,7 @@ def chat(fbid,message):
 			if "http://stackoverflow.com/" in url:
 				print "entered"
 				soverflowurl = url
-			elif "http://www.youtube.com/" in url:
+			elif "https://www.youtube.com/" in url:
 				videos(fbid,url)
 				return
 			else :
