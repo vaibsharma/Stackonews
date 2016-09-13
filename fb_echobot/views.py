@@ -161,7 +161,7 @@ def news(fbid,message):
 
 						print "Checking all the inputs"	
 						print xa['description'],xa['country'],xa['urlsToLogos']['medium'],xa['category'],xa['url']	
-						post_facebook_template_message(fbid,xa['description'],xa['country'],xa['urlsToLogos']['medium'],xa['category'],xa['urls'])
+						post_facebook_template_message(fbid,xa['description'],xa['country'],xa['urlsToLogos']['medium'],xa['category'],xa['url'])
 						return
 			except :
 				print "template not send"
