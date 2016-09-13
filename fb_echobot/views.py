@@ -230,7 +230,7 @@ def videos(fbid,url):
 	p = re.compile(ur'^https:\/\/www.youtube.com\/watch\?(?P<digit>\w+)=(?P<first_name>[0-9a-zA-Z]+)$')
 	result = re.search(p, url)
 	new_url = "https://www.youtube.com/"+str(result.group('digit')+"/"+str(result.group('first_name').decode('utf-8'))
-	print new_url
+	print new_url.decode('utf-8')
 	response_msg1 = json.dumps(
         {"recipient":{"id":fbid}, 
             "message":{
