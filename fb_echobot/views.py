@@ -155,7 +155,7 @@ def news(fbid,message):
 				news_result = result['sources']
 				for xa in news_result:
 					if xa['category'] == categ :
-						if xa['description'] is None:
+						if len(xa['description']) == 0:
 							post_facebook_message(fbid,"Sorry!   which news category you want (please mention it with the suffix news) Thank you!")
 							return
 
@@ -225,6 +225,7 @@ def videos(fbid,url):
 	p = re.compile(ur'^https:\/\/www.youtube.com\/watch\?(?P<digit>\w+)=(?P<first_name>[0-9a-zA-Z]+)$')
 	result = re.search(p, url)
 	new_url = "https://www.youtube.com/e/"+str(result.group('first_name').decode('utf-8'))
+	print new_url
 	response_msg1 = json.dumps(
         {"recipient":{"id":fbid}, 
             "message":{
