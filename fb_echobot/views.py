@@ -182,7 +182,7 @@ def post_facebook_template_message(fbid,description,country,logo,category,urls):
             "template_type":"generic",
             "elements":[
             	{
-            		"title":category + " " +country,
+            		"title":category,
            			"item_url":urls,
             		"image_url":logo,
             		"subtitle":description,
@@ -191,12 +191,7 @@ def post_facebook_template_message(fbid,description,country,logo,category,urls):
                     	"type":"web_url",
                     	"url":urls,
            	 			"title":"View Website"
-                 	},
-              		{
-                		"type":"postback",
-                		"title":"Start Chatting",
-                		"payload":"DEVELOPER_DEFINED_PAYLOAD"
-              		}              
+                 	}             
        				]
           		}
         	]
