@@ -160,7 +160,7 @@ def news(fbid,message):
 							return
 
 						print "Checking all the inputs"	
-						print xa['description'],xa['country'],xa['urlsToLogos']['medium'],xa['category'],xa['urls']	
+						print xa['description'],xa['country'],xa['urlsToLogos']['medium'],xa['category'],xa['url']	
 						post_facebook_template_message(fbid,xa['description'],xa['country'],xa['urlsToLogos']['medium'],xa['category'],xa['urls'])
 						return
 			except :
