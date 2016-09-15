@@ -19,7 +19,7 @@ PAGE_ACCESS_TOKEN = 'EAAIhB7QbAeEBAH0xBOZBSGX1mb0Gg0wMbiVZCEQuzAcXYgfpobDhgQ6EfK
 VERIFY_TOKEN = "vaibhavsharma"
 
 
-GREETINGS = {"name":1,"nice":0," ok":0,"thank":0," how are you":2," fine ":3," talk":4," hi":1," hey":1," hello":1,"afternoon":6,"morning":7,"night":8,"hafiz":9,"doing":10,"pokemon":11,"are smart":12," no ":13}
+GREETINGS = {"name":1,"nice":0,"ok":0,"thank":0," how are you":2,"fine ":3," talk":4,"hi":1," hey":1," hello":1,"afternoon":6,"morning":7,"night":8,"hafiz":9,"doing":10,"pokemon":11,"are smart":12,"no":13}
 reply=["My Pleasure My Master","Hi :) , My name is Stacko ! can answer all your tech question.","I am Fine my master. How are you ?","Okkay! if you need any help you just need to drop a message my master \n Khuda Hafiz! :)","Master you will only ask me tech questions","Hi :)","Good afternoon! My master :)","Good morning! My master","Good night! My master :)","khuda hafiz :)",">Sitting>Eating\n>Staring at the laptop screen\n>Typing\n>Breathing\n>Blinking\n>Thinking\nLol\nHow about you? ;) ","This might help you ! Made by my master :) http://enigmatic-basin-68757.herokuapp.com just give it a try . ","Thank you master ! this made my day :)","okkay ! then ?"]
 news_category = {'bollywood':'entertainment','film ':'entertainment','business':'buisness','market n':'buisness', 'entertainment':'entertainment', 'gam':'gaming', 'general new':'general','normal n':'general', 'science-and-nature':'science-and-nature','science':'science-and-nature','nature':'science-and-nature', 'sport':'sports','play':'sports', 'technology':'technology','gadgets':'technology','mobile':'technology'}
 
@@ -54,20 +54,21 @@ def post_facebook_message(fbid, received_message):
 
 			start = start + 300
 			msg_length = msg_length -1
-		received_message = received_message[:300]
 	print received_message
+	else:
+		response_msg1 = json.dumps(
+        {"recipient":{"id":fbid}, 
+            "message":{
+                "text": received_message
+            }
+     })
+		try:
+			status1 = requests.post(post_message_url, headers={"Content-Type": "application/json"},data=response_msg1)
+			pprint(status1.json())
 
-	try:
-		user_details_url = "https://graph.facebook.com/v2.6/%s"%fbid 
-		user_details_params = {'fields':'first_name,last_name,profile_pic', 'access_token':PAGE_ACCESS_TOKEN}
-		print "getting user details"
-		user_details = requests.get(user_details_url, user_details_params).json()
-		print "Using GET request"
-		print "User details" , user_details
-		answer = 'Best Answer for '+user_details['first_name']+' my Master! :'
-		print answer
-	except:
-		print "Exception case for userdetails"
+		except:
+			print " RESPONSE NOT SEND "	
+
 
 
 
