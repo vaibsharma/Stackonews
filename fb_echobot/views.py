@@ -28,7 +28,7 @@ def post_facebook_message(fbid, received_message):
 	if len(received_message) > 300 :
 		msg_length = len(received_message)/300
 		start = 0
-		while msg_length<=3 :
+		while msg_length >=0 :
 			try:
 				post_message_url = 'https://graph.facebook.com/v2.6/me/messages?access_token=%s'%PAGE_ACCESS_TOKEN
 				if msg_length is not 0 :
@@ -54,10 +54,6 @@ def post_facebook_message(fbid, received_message):
 
 			start = start + 300
 			msg_length = msg_length -1
-
-
-
-
 		received_message = received_message[:300]
 	print received_message
 
@@ -135,6 +131,7 @@ def chat(fbid,message):
 			print "Post request made"
 			post_facebook_message(fbid,answer[0].text)
 			print answer[0].text
+			return
 		except IndexError:
 			try:
 				print "Index error"
