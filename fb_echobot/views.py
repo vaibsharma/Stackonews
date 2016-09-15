@@ -53,7 +53,7 @@ def post_facebook_message(fbid, received_message):
 				print "Post request Not working"
 
 			start = start + 300
-			msg_length = msg_length -1 
+			msg_length = msg_length -1
 
 
 
@@ -72,28 +72,7 @@ def post_facebook_message(fbid, received_message):
 		print answer
 	except:
 		print "Exception case for userdetails"
-		answer = "Best Answer for my Master :"
-		print answer
 
-	print "makig a post url "
-	post_message_url = 'https://graph.facebook.com/v2.6/me/messages?access_token=%s'%PAGE_ACCESS_TOKEN
-    
-	response_msg1 = json.dumps(
-        {"recipient":{"id":fbid}, 
-            "message":{
-                "text": received_message
-            }
-     })
-	try :
-		print "Making A post request"
-		status1 = requests.post(post_message_url, headers={"Content-Type": "application/json"},data=response_msg1)
-		pprint(status1.json())
-	except:
-		print "Post request Not working"	
-	
-	
-	
-		
 
 
 class fb(generic.View):
@@ -167,9 +146,11 @@ def chat(fbid,message):
 				print "index error post request made"
 				post_facebook_message(fbid,answer[0].text)
 				print answer[0].text
+				return
 			except:
 				print "Extreme exception"
-				post_facebook_message(fbid,"Try giving me the exact problem! My master!")	
+				post_facebook_message(fbid,"Try giving me the exact problem! My master!")
+				return	
 
 def news(fbid,message):
 	print "ENTER in THE NEWS FUNCTION\n"
