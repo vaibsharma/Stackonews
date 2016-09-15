@@ -19,13 +19,45 @@ PAGE_ACCESS_TOKEN = 'EAAIhB7QbAeEBAH0xBOZBSGX1mb0Gg0wMbiVZCEQuzAcXYgfpobDhgQ6EfK
 VERIFY_TOKEN = "vaibhavsharma"
 
 
-GREETINGS = {"name":1,"nice":0,"ok":0,"thank":0,"how are you":2,"fine":3,"talk":4,"hi":5,"hey":5,"hello":5,"afternoon":6,"morning":7,"night":8,"hafiz":9,"doing":10,"pokemon":11,"are smart":12,"no":13}
-reply=["My Pleasure My Master","My name is Stacko ! can answer all your tech question.","I am Fine my master. How are you ?","Okkay! if you need any help you just need to drop a message my master \n Khuda Hafiz! :)","Master you will only ask me tech questions","Hi :)","Good afternoon! My master :)","Good morning! My master","Good night! My master :)","khuda hafiz :)",">Sitting>Eating\n>Staring at the laptop screen\n>Typing\n>Breathing\n>Blinking\n>Thinking\nLol\nHow about you? ;) ","This might help you ! Made by my master :) http://enigmatic-basin-68757.herokuapp.com just give it a try . ","Thank you master ! this made my day :)","okkay ! then ?"]
+GREETINGS = {"name":1,"nice":0," ok":0,"thank":0," how are you":2," fine ":3," talk":4," hi":1," hey":1," hello":1,"afternoon":6,"morning":7,"night":8,"hafiz":9,"doing":10,"pokemon":11,"are smart":12," no ":13}
+reply=["My Pleasure My Master","Hi :) , My name is Stacko ! can answer all your tech question.","I am Fine my master. How are you ?","Okkay! if you need any help you just need to drop a message my master \n Khuda Hafiz! :)","Master you will only ask me tech questions","Hi :)","Good afternoon! My master :)","Good morning! My master","Good night! My master :)","khuda hafiz :)",">Sitting>Eating\n>Staring at the laptop screen\n>Typing\n>Breathing\n>Blinking\n>Thinking\nLol\nHow about you? ;) ","This might help you ! Made by my master :) http://enigmatic-basin-68757.herokuapp.com just give it a try . ","Thank you master ! this made my day :)","okkay ! then ?"]
 news_category = {'bollywood':'entertainment','film ':'entertainment','business':'buisness','market n':'buisness', 'entertainment':'entertainment', 'gam':'gaming', 'general new':'general','normal n':'general', 'science-and-nature':'science-and-nature','science':'science-and-nature','nature':'science-and-nature', 'sport':'sports','play':'sports', 'technology':'technology','gadgets':'technology','mobile':'technology'}
 
 def post_facebook_message(fbid, received_message):
 	print "fbid" , fbid
 	if len(received_message) > 300 :
+		msg_length = len(received_message)/300
+		start = 0
+		while msg_length<=3 :
+			try:
+				post_message_url = 'https://graph.facebook.com/v2.6/me/messages?access_token=%s'%PAGE_ACCESS_TOKEN
+				if msg_length is not 0 :
+					response_msg1 = json.dumps(
+        {"recipient":{"id":fbid}, 
+            "message":{
+                "text": received_message[start:start+300]
+            }
+     })
+				else:
+					response_msg1 = json.dumps(
+        {"recipient":{"id":fbid}, 
+            "message":{
+                "text": received_message[start:]
+            }
+     })
+				status1 = requests.post(post_message_url, headers={"Content-Type": "application/json"},data=response_msg1)
+				pprint(status1.json())	
+
+
+			except:
+				print "Post request Not working"
+
+			start = start + 300
+			msg_length = msg_length -1 
+
+
+
+
 		received_message = received_message[:300]
 	print received_message
 
