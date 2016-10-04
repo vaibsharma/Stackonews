@@ -94,6 +94,14 @@ class fb(generic.View):
 		 			except:
 		 				logg("#","Message not send","-95-")
 		 				pass
+		 		elif 'postback' in message:
+		 			pprint(message["postback"])
+		 			try:
+		 				logg("@","Postback","-100-")
+		 				check(message['sender']['id'],message['postback']['payload'])
+		 			except:
+		 				logg("#","Postback was not handled","-103-")
+		 				pass
 		return HttpResponse()
 
 
@@ -271,4 +279,25 @@ def logg(symbol,text,lineno):
 def index():
 	chat("121836821328213","hi")
 
-#def check(fbid,message):	
+def check(fbid,payload):
+	if payload == "stack":
+		try:
+			p = Check.objects.get_or_create(status="No")[0]
+			p.status="No"
+			p.save()
+			print "updated"
+		except:
+			print "failed"
+		return
+	if payload == "news":
+		try:
+			p = Check.objects.get_or_create(status="No")[0]
+			p.status = "Yes"
+			p.save()
+			news(fbid,payload + " general")
+		except:
+			print "NO changes done"	
+	else:
+		return	
+
+
