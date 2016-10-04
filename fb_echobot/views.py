@@ -68,10 +68,12 @@ def post_facebook_message(fbid, received_message):
 
 class fb(generic.View):
 	def get(self, request, *args, **kwargs):
+		logg("$"," ","-71-")
 		if self.request.GET['hub.verify_token'] == VERIFY_TOKEN:
-
+			logg("$"," ","-73-")
 			return HttpResponse(self.request.GET['hub.challenge'])
 		else:
+			logg("$"," ","-76-")
 			return HttpResponse('Error, invalid token')
 
 	@method_decorator(csrf_exempt)
@@ -80,11 +82,13 @@ class fb(generic.View):
 
 	def post(self, request, *args, **kwargs):
 		incoming_message = json.loads(self.request.body.decode('utf-8'))
+		logg("$"," ","-85-")
 		for entry in incoming_message['entry']:
 		 	for message in entry['messaging']:
 		 		if 'message' in message:
 		 			pprint(message)
 		 			try:
+		 				logg("$","Calling from post ","-91-")
 		 				chat(message['sender']['id'], message['message']['text'])
 		 			except:
 		 				logg("#","Message not send","-95-")
@@ -259,3 +263,6 @@ def videos(fbid,url="https://www.youtube.com/v/ej3ebj3F"):
 
 def logg(symbol,text,lineno):
 	print symbol*10 + "\n" + "\t" + TEXT + "\n" + symbol*10 +"\n"+ "\t" + lineno*3 +"\n"
+
+def index():
+	chat("121836821328213","hi")	
