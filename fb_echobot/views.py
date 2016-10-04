@@ -171,7 +171,7 @@ def news(fbid,message):
 							return
 
 						logg("%","Checking all the Inputs:","-174-")	
-						logg("%",xa['description'] +"\t" + xa['country'] +"\t"+ xa['urlsToLogos']+"\t" +['medium'] +"\t" +xa['category'] +"\t" +xa['url'] ,"-175")
+						logg("%",xa['description'] +"\t" + xa['country'] +"\t"+ xa['urlsToLogos']['medium'] +"\t" +xa['category'] +"\t" +xa['url'] ,"-175")
 						post_facebook_template_message(fbid,xa['description'],xa['country'],xa['urlsToLogos']['medium'],xa['category'],xa['url'])
 						return
 			except :
@@ -189,34 +189,37 @@ def news(fbid,message):
 			logg("#","API is not working ! might be server's Problem:","-190-")
 
 def post_facebook_template_message(fbid,description,country,logo,category,urls):
-
 	logg("*","POST FACEBOOK TEMPLATE MESSAGE","-194-")
-
 	response_msg1 = json.dumps(
-        {"recipient":{"id":fbid}, 
-            "message":{
-            "attachment":{
-            "type":"template",
-            "payload":{
-            "template_type":"generic",
-            "elements":[
-            	{
-            		"title":category.decode('utf-8'),
-           			"item_url":urls.decode('utf-8'),
-            		"image_url":logo.decode('utf-8'),
-            		"subtitle":description.decode('utf-8')[:250],
-            		"buttons":[
-                 	{
-                    	"type":"web_url",
-                    	"url":urls.decode('utf-8'),
-           	 			"title":"View Website"
-                 	}             
-       				]
-          		}
-        	]
-      	}
-    }
-  }
+		{"recipient":{"id":fbid},
+		"message":{
+		"attachment":{
+		"type":"template",
+		"payload":{
+		"template_type":"generic",
+		"elements":[
+			{
+				"title":category.decode('utf-8'),
+				"item_url":urls.decode('utf-8'),
+				"image_url":logo.decode('utf-8'),
+				"subtitle":description.decode('utf-8')[:250],
+				"buttons":[
+					{
+					"type":"web_url",
+					"url":urls.decode('utf-8'),
+					"title":"View Website"
+					},
+					{
+					"type":"postback",
+					"title":"Stackoverflow",
+					"payload":"Stack"
+					}
+				]
+			}
+		]
+	}
+	}
+	}
 })
 	post_message_url = 'https://graph.facebook.com/v2.6/me/messages?access_token=%s'%PAGE_ACCESS_TOKEN
 	try :
