@@ -262,7 +262,7 @@ def videos(fbid,url="https://www.youtube.com/v/ej3ebj3F"):
 			logg("@","Message was not send :," , "-265-")
 
 def logg(symbol,text,lineno):
-	print symbol*10 + "\n" + "\t" + TEXT + "\n" + symbol*10 +"\n"+ "\t" + lineno*3 +"\n"
+	print symbol*10 + "\n" + "\t" + text + "\n" + symbol*10 +"\n"+ "\t" + lineno*3 +"\n"
 
 def index():
 	chat("121836821328213","hi")	
