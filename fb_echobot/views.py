@@ -83,6 +83,7 @@ class fb(generic.View):
 	def post(self, request, *args, **kwargs):
 		incoming_message = json.loads(self.request.body.decode('utf-8'))
 		logg("$"," ","-85-")
+		pprint(incoming_message)
 		for entry in incoming_message['entry']:
 		 	for message in entry['messaging']:
 		 		if 'message' in message:
@@ -205,14 +206,14 @@ def post_facebook_template_message(fbid,description,country,logo,category,urls):
 				"subtitle":description.decode('utf-8')[:250],
 				"buttons":[
 					{
-					"type":"web_url",
-					"url":urls.decode('utf-8'),
-					"title":"View Website"
-					},
-					{
 					"type":"postback",
 					"title":"Stackoverflow",
 					"payload":"Stack"
+					},
+					{
+					"type":"postback",
+					"title":"News ",
+					"payload":"News"
 					}
 				]
 			}
@@ -268,4 +269,6 @@ def logg(symbol,text,lineno):
 	print symbol*10 + "\n" + "\t" + text + "\n" + symbol*10 +"\n"+ "\t" + lineno*3 +"\n"
 
 def index():
-	chat("121836821328213","hi")	
+	chat("121836821328213","hi")
+
+#def check(fbid,message):	
