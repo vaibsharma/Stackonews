@@ -111,6 +111,40 @@ def chat(fbid,message):
 		if name in message.lower() :
 			flag = 0
 			post_facebook_message(fbid,reply[GREETINGS[name]])
+			response1 = json.dumps({
+			  "recipient":{
+			    "id":fbid
+			  },
+			  "message":{
+			    "attachment":{
+			      "type":"template",
+			      "payload":{
+			        "template_type":"button",
+			        "text":"Please select your query :-",
+			        "buttons":[
+			        			{
+			        				"type":"postback",
+			        				"title":"Stackoverflow",
+			        				"payload":"Stack"
+			        			},
+			        			{
+			        				"type":"postback",
+			        				"title":"News ",
+			        				"payload":"News"
+			        			}
+			        		]
+			      }
+			    }
+			  }
+			  })
+			post_message_url = 'https://graph.facebook.com/v2.6/me/messages?access_token=%s'%PAGE_ACCESS_TOKEN
+			try :
+				logg("*","TRYING NEWS TEMPLATE","-142-")
+				status1 = requests.post(post_message_url, headers={"Content-Type": "application/json"},data=response_msg1)
+				pprint(status1.json())
+			except :
+				logg("!","Template failed","-146-")
+
 			return
 
 	if 'news' in message :
@@ -213,17 +247,13 @@ def post_facebook_template_message(fbid,description,country,logo,category,urls):
 				"image_url":logo.decode('utf-8'),
 				"subtitle":description.decode('utf-8')[:250],
 				"buttons":[
-					{
-					"type":"postback",
-					"title":"Stackoverflow",
-					"payload":"Stack"
-					},
-					{
-					"type":"postback",
-					"title":"News ",
-					"payload":"News"
-					}
-				]
+          {
+            "type":"web_url",
+            "url":urls,
+            "title":"Show Website"
+          }
+          ]
+
 			}
 		]
 	}
