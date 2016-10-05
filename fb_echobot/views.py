@@ -280,24 +280,39 @@ def index():
 	chat("121836821328213","hi")
 
 def check(fbid,payload):
-	if payload == "stack":
+	if payload == "Stack":
 		try:
-			p = Check.objects.get_or_create(status="No")[0]
-			p.status="No"
-			p.save()
-			print "updated"
+			logg("$","Checking databases ","-285-")
+			logg("^"," Databases ","-286-")
+			print Check.objects.all()
+			for x in Check.objects.all():
+				if x.status == "No":
+					x.status = "Yes"
+					x.save()
+					logg("#","Saving is Successful","-291-")
 		except:
-			print "failed"
-		return
-	if payload == "news":
+			try:
+				p = Check.objects.get_or_create(status="Please")[0]
+				p.save()
+				logg("%","Saving successful","-293-")
+				return
+			except:
+				logg("#","saving failed","-300-")	
+	if payload == "News":
 		try:
-			p = Check.objects.get_or_create(status="No")[0]
-			p.status = "Yes"
-			p.save()
+			logg("$","Checking databases ","-295-")
+			logg("^"," Databases ","-296-")
+			print Check.objects.all()
+			for x in Check.objects.all():
+				if x.status == "No":
+					logg("!","Checking","-299-")
+					x.status = "Yes1"
+					x.save()
+					logg("#","Saving is Successful","-291-")
 			news(fbid,payload + " general")
 		except:
-			print "NO changes done"	
+			print "NO changes done"
 	else:
-		return	
+		return
 
 
