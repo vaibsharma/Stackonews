@@ -324,40 +324,40 @@ def check(fbid,payload):
 		try:
 			chat(fbid,"hi")
 		except:
-			logg("@","Please check the line ","-327-")	
+			logg("@","Please check the line ","-327-")
 		return
 	response1 == json.dumps({
-	  "recipient":{
-	    "id":fbid
-	  },
-	  "message":{
-	    "attachment":{
-	      "type":"template",
-	      "payload":{
-	        "template_type":"button",
-	        "text": message,
-	        "buttons":[
-	          {
-	            "type":"postback",
-	            "title":"Start Chatting",
-	            "payload": "Go_Back"
-	          }
-	        ]
-	      }
-	    }
-	  }
-	})
+		"recipient":{
+		"id":fbid
+		},
+		"message":{
+		"attachment":{
+		"type":"template",
+			"payload":{
+			"template_type":"button",
+			"text": message,
+			"buttons":[
+			{
+				"type":"postback",
+				"title":"Start Chatting",
+				"payload": "Go_Back"
+				}
+			]
+			}
+		}
+	}
+})
 	post_message_url = 'https://graph.facebook.com/v2.6/me/messages?access_token=%s'%PAGE_ACCESS_TOKEN
 	try :
-		logg("%","Trying function :"," -348-")
+		logg("%","Trying function :"," -352-")
 		status1 = requests.post(post_message_url, headers={"Content-Type": "application/json"},data=response1)
 		pprint(status1.json())
 	except :
 		try :
-			logg("^","Video was not send :"," -353-")
+			logg("^","Check this line :"," -357-")
 			post_facebook_message(fbid,"Please brief your choice!")
 		except :
-			logg("@","Message was not send :," , "-356-")
+			logg("@","Message was not send :," , "-360-")
 
 
 
