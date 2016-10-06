@@ -312,37 +312,52 @@ def index():
 def check(fbid,payload):
 	if payload == "Stack":
 		try:
-			logg("$","Checking databases ","-285-")
-			logg("^"," Databases ","-286-")
-			print Check.objects.all()
-			for x in Check.objects.all():
-				if x.status == "No":
-					x.status = "Yes"
-					x.save()
-					logg("#","Saving is Successful","-291-")
+			message = "Please ask question ?"
 		except:
-			try:
-				p = Check.objects.get_or_create(status="Please")[0]
-				p.save()
-				logg("%","Saving successful","-293-")
-				return
-			except:
-				logg("#","saving failed","-300-")	
+			logg("^","Message failed","-317-")	
 	if payload == "News":
 		try:
-			logg("$","Checking databases ","-295-")
-			logg("^"," Databases ","-296-")
-			print Check.objects.all()
-			for x in Check.objects.all():
-				if x.status == "No":
-					logg("!","Checking","-299-")
-					x.status = "Yes1"
-					x.save()
-					logg("#","Saving is Successful","-291-")
-			news(fbid,payload + " general")
+			message = "Please type ' {country-name} and {category}' ?"
 		except:
 			print "NO changes done"
-	else:
+	if payload == "Go_Back" :
+		try:
+			chat(fbid,"hi")
+		except:
+			logg("@","Please check the line ","-327-")	
 		return
+	response1 == json.dumps({
+	  "recipient":{
+	    "id":fbid
+	  },
+	  "message":{
+	    "attachment":{
+	      "type":"template",
+	      "payload":{
+	        "template_type":"button",
+	        "text": message,
+	        "buttons":[
+	          {
+	            "type":"postback",
+	            "title":"Start Chatting",
+	            "payload": "Go_Back"
+	          }
+	        ]
+	      }
+	    }
+	  }
+	})
+	post_message_url = 'https://graph.facebook.com/v2.6/me/messages?access_token=%s'%PAGE_ACCESS_TOKEN
+	try :
+		logg("%","Trying function :"," -348-")
+		status1 = requests.post(post_message_url, headers={"Content-Type": "application/json"},data=response1)
+		pprint(status1.json())
+	except :
+		try :
+			logg("^","Video was not send :"," -353-")
+			post_facebook_message(fbid,"Please brief your choice!")
+		except :
+			logg("@","Message was not send :," , "-356-")
+
 
 
