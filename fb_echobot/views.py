@@ -115,29 +115,29 @@ def chat(fbid,message):
 			response1 = json.dumps({
 			  "recipient":{
 			    "id":fbid
-			  },
-			  "message":{
-			    "attachment":{
-			      "type":"template",
-			      "payload":{
-			        "template_type":"button",
-			        "text":"Please select your query :-",
-			        "buttons":[
-			        			{
-			        				"type":"postback",
-			        				"title":"Stackoverflow",
-			        				"payload":"Stack"
-			        			},
-			        			{
-			        				"type":"postback",
-			        				"title":"News ",
-			        				"payload":"News"
-			        			}
-			        		]
-			      }
-			    }
-			  }
-			  })
+			},
+			"message":{
+			"attachment":{
+			"type":"template",
+			"payload":{
+			"template_type":"button",
+			"text":"Please select your query :-",
+			"buttons":[
+						{
+			        		"type":"postback",
+			        		"title":"Stackoverflow",
+			        		"payload":"Stack"
+			        	},
+			        	{
+			        		"type":"postback",
+			        		"title":"News ",
+			        		"payload":"News"
+			        	}
+			        ]
+			}
+			}
+			}
+			})
 			post_message_url = 'https://graph.facebook.com/v2.6/me/messages?access_token=%s'%PAGE_ACCESS_TOKEN
 			try :
 				logg("*","TRYING NEWS TEMPLATE","-142-")
