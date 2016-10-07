@@ -146,7 +146,7 @@ def chat(fbid,message):
 			except :
 				logg("!","Template failed","-146-")
 
-			return
+		return
 
 	if 'news' in message :
 		news(fbid,message)
