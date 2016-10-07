@@ -335,13 +335,19 @@ def check(fbid,payload):
 		"type":"template",
 			"payload":{
 			"template_type":"button",
-			"text": message,
+			"text": "Please choose your option : " ,
 			"buttons":[
 			{
 				"type":"postback",
-				"title":"Start Chatting",
+				"title":"Wanna go back ?",
 				"payload": "Go_Back"
+				},
+				{
+				"type":"postback",
+				"title":message,
+				"payload": message
 				}
+
 			]
 			}
 		}
