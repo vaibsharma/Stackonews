@@ -106,6 +106,7 @@ class fb(generic.View):
 
 
 def chat(fbid,message):
+	logg("!",message,"-109-")
 	flag = 1 
 	for name in GREETINGS.keys():
 		if name in message.lower() :
@@ -358,6 +359,7 @@ def check(fbid,payload):
 		}
 	}
 })
+	logg("!","response is ready ","-361-")
 	post_message_url = 'https://graph.facebook.com/v2.6/me/messages?access_token=%s'%PAGE_ACCESS_TOKEN
 	try :
 		logg("%","Trying function :"," -352-")
