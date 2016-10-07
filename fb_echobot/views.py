@@ -109,9 +109,13 @@ def chat(fbid,message):
 	logg("!",message,"-109-")
 	flag = 1 
 	for name in GREETINGS.keys():
+		log("!",name,"-112-")
 		if name in message.lower() :
 			flag = 0
-			post_facebook_message(fbid,reply[GREETINGS[name]])
+			try:
+				post_facebook_message(fbid,reply[GREETINGS[name]])
+			except:
+				logg("!","message not send","-118-")	
 			response1 = json.dumps({
 			  "recipient":{
 			    "id":fbid
@@ -138,6 +142,8 @@ def chat(fbid,message):
 			}
 			}
 			})
+			logg("!","Check this line","-142-")
+			
 			post_message_url = 'https://graph.facebook.com/v2.6/me/messages?access_token=%s'%PAGE_ACCESS_TOKEN
 			try :
 				logg("*","TRYING NEWS TEMPLATE","-142-")
