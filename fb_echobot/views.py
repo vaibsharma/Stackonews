@@ -123,17 +123,17 @@ def chat(fbid,message):
 			"template_type":"button",
 			"text":"Please select your query :-",
 			"buttons":[
-						{
-			        		"type":"postback",
-			        		"title":"Stackoverflow",
-			        		"payload":"Stack"
-			        	},
-			        	{
-			        		"type":"postback",
-			        		"title":"News ",
-			        		"payload":"News"
-			        	}
-			        ]
+			{
+				"type":"postback",
+				"title":"Stackoverflow",
+				"payload":"Stack"
+				},
+				{
+				"type":"postback",
+				"title":"News ",
+				"payload":"News"
+				}
+				]
 			}
 			}
 			}
