@@ -149,10 +149,11 @@ def chat(fbid,message):
 				logg("*","TRYING NEWS TEMPLATE","-142-")
 				status1 = requests.post(post_message_url, headers={"Content-Type": "application/json"},data=response1)
 				pprint(status1.json())
+				return
 			except :
 				logg("!","Template failed","-146-")
 
-		return
+		
 
 	if 'news' in message :
 		news(fbid,message)
