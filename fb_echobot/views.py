@@ -310,14 +310,19 @@ def index():
 	chat("121836821328213","hi")
 
 def check(fbid,payload):
+	logg("@","Checking news function","-313-")
 	if payload == "Stack":
+		logg("!","Checking Stack Payload","-315-")
 		try:
+			logg("!","check this line","-317-")
 			message = "Please ask question ?"
 		except:
 			logg("^","Message failed","-317-")	
 	if payload == "News":
+		logg("@","Checking news payload","-322-")
 		try:
-			message = "Please type ' {country-name} and {category}' ?"
+			logg("#","^^chhecing line ","-324-")
+			message = "Please type ' country-name and category' ?"
 		except:
 			print "NO changes done"
 	if payload == "Go_Back" :
