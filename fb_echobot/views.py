@@ -109,7 +109,7 @@ def chat(fbid,message):
 	logg("!",message,"-109-")
 	flag = 1 
 	for name in GREETINGS.keys():
-		log("!",name,"-112-")
+		logg("!",name,"-112-")
 		if name in message.lower() :
 			flag = 0
 			try:
