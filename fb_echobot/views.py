@@ -339,7 +339,7 @@ def check(fbid,payload):
 		except:
 			logg("@","Please check the line ","-327-")
 		return
-	response1 == json.dumps({
+	response1 = json.dumps({
 		"recipient":{
 		"id":fbid
 		},
