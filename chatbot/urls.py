@@ -10,4 +10,5 @@ urlpatterns = patterns(
     # url(r'^blog/', include('blog.urls')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^facebookcheck/?$',views.fb.as_view(),name="chatbot"),
+    url(r'^blog$',views.blog,name="blog"),
 )
