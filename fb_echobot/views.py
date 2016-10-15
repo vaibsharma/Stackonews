@@ -382,6 +382,7 @@ def check(fbid,payload):
 
 
 def blog(request):
+	print "requested accepted"
 	if request.method == "POST":
 		print "posting"
 		name = request.POST.get("name") or " "
@@ -401,4 +402,6 @@ def blog(request):
 		except:
 			print "failed"
 			return HttpResponse()
+
+	print "failed"		
 	return HttpResponse()				
