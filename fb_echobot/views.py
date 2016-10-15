@@ -404,4 +404,12 @@ def blog(request):
 			return HttpResponse()
 
 	print "failed"		
-	return HttpResponse()				
+	return HttpResponse()
+
+def main(request):
+	return render(request,"fb_echobot/account.html",{"data":None})
+
+def index(request):
+	if request.method =='POST':
+		return render(request,"fb_echobot/base.html",{"data":[None]})
+	return render(request,"fb_echobot/base.html",{"data":[None]})

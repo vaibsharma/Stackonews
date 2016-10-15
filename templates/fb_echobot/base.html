@@ -1,0 +1,120 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta itemprop="name" content="SearchPokemon" />
+  
+  <meta itemprop="description" content="Alpha coders | This will gonna be all new learning experience."">
+
+  <meta itemprop="image" content="https://rawgit.com/vaibsharma/PokemonSearch/master/Screenshot%20from%202016-08-28%2005:00:37.png">
+
+  <meta property="og:title" content="SearchPokemon"/>
+  <meta property="og:description" content="Alpha coders | This will gonna be all new learning experience.""/>
+  <meta property="og:image" content="https://rawgit.com/vaibsharma/PokemonSearch/master/Screenshot%20from%202016-08-28%2005:00:37.png"/> 
+  <meta property="og:site_name" content="enigmatic-basin-68757.herokuapp.com"/> 
+
+  <meta property="og:url" content="enigmatic-basin-68757.herokuapp.com" />
+  <meta property="article:author" content="http://facebook.com/techobist" />
+  <meta property="article:publisher" content="https://www.facebook.com/techobist"/>
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@HRmVaib" />
+  <meta name="twitter:title" content="SearchPokemon" />
+  <!-- <meta name="twitter:description" content="" /> -->
+  <meta name="twitter:description" content="Alpha coders | This will gonna be all new learning experience."" />
+  <meta name="twitter:image" content="https://rawgit.com/vaibsharma/PokemonSearch/master/Screenshot%20from%202016-08-28%2005:00:37.png" />
+          
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+{% block title %}
+
+{% endblock %}
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
+
+ <link rel="stylesheet" href="https://cdn.rawgit.com/HackIITD/Template-for-Django-Portal/master/staticfiles/css/bootstrap-theme.min.css" crossorigin="anonymous">
+       <link rel="stylesheet" href="https://cdn.rawgit.com/HackIITD/Template-for-Django-Portal/master/staticfiles/css/bootstrap.min.css" crossorigin="anonymous">
+       <link rel="shortcut icon" href="https://cdn.rawgit.com/HackIITD/Template-for-Django-Portal/master/staticfiles/images/favicon.ico" type="image/x-icon">
+       <link rel="icon" href="https://cdn.rawgit.com/HackIITD/Template-for-Django-Portal/master/staticfiles/images/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="https://cdn.rawgit.com/HackIITD/Template-for-Django-Portal/master/staticfiles/assets/animate/animate.css" crossorigin="anonymous"> 
+       <link rel="stylesheet" href="https://cdn.rawgit.com/HackIITD/Template-for-Django-Portal/master/staticfiles/assets/animate/set.css" crossorigin="anonymous"> 
+       <link rel="stylesheet" href="https://cdn.rawgit.com/HackIITD/Template-for-Django-Portal/master/staticfiles/assets/gallery/blueimp-gallery.min.css" crossorigin="anonymous">
+       
+       <link rel="stylesheet" href="https://cdn.rawgit.com/HackIITD/Template-for-Django-Portal/master/staticfiles/assets/style.css" crossorigin="anonymous">
+
+{% block link %}
+{% endblock %}
+
+</head>
+
+<body>
+
+{% block style %}
+ 
+ {% endblock %} 
+<form method="POST" action="/">
+  {% csrf_token %}
+                    <div class="row control-group">
+                        <div class="form-group col-xs-12 floating-label-form-group controls">
+                            <label>Name</label>
+                            <input type="text" class="form-control" placeholder="Name" required data-validation-required-message="Please enter your name." name="name">
+                            <p class="help-block text-danger"></p>
+                        </div>
+                    </div>
+                    <div class="row control-group">
+                        <div class="form-group col-xs-12 floating-label-form-group controls">
+                            <label>Email Address</label>
+                            <input type="email" class="form-control" placeholder="Email Address" required data-validation-required-message="Please enter your email address." name="mail_id">
+                            <p class="help-block text-danger"></p>
+                        </div>
+                    </div>
+                    <div class="row control-group">
+                        <div class="form-group col-xs-12 floating-label-form-group controls">
+                            <label>Phone Number</label>
+                            <input type="tel" class="form-control" placeholder="Phone Number" required data-validation-required-message="Please enter your phone number.">
+                            <p class="help-block text-danger" name="phone_number"></p>
+                        </div>
+                    </div>
+                    <div class="row control-group">
+                        <div class="form-group col-xs-12 floating-label-form-group controls">
+                            <label>Message</label>
+                            <textarea rows="5" class="form-control" placeholder="Message" required data-validation-required-message="Please enter a message." name="message"></textarea>
+                            <p class="help-block text-danger"></p>
+                        </div>
+                    </div>
+                    <br>
+                    <div id="success"></div>
+                    <div class="row">
+                        <div class="form-group col-xs-12">
+                            <button type="submit" class="btn btn-default">Send</button>
+                        </div>
+                    </div>
+                </form>
+
+ {% block content %}
+  
+ {% endblock %}
+
+ 
+ <script src="https://cdn.rawgit.com/HackIITD/Template-for-Django-Portal/master/staticfiles/assets/jquery.js" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<!-- jquery mobile -->
+
+
+
+<script src="https://cdn.rawgit.com/HackIITD/Template-for-Django-Portal/master/staticfiles/assets/wow/wow.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.rawgit.com/HackIITD/Template-for-Django-Portal/master/staticfiles/assets/mobile/touchSwipe.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.rawgit.com/HackIITD/Template-for-Django-Portal/master/staticfiles/assets/respond/respond.js" crossorigin="anonymous"></script>
+<script src="https://cdn.rawgit.com/HackIITD/Template-for-Django-Portal/master/staticfiles/assets/gallery/jquery.blueimp-gallery.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.rawgit.com/HackIITD/Template-for-Django-Portal/master/staticfiles/assets/script.js" crossorigin="anonymous"></script>
+{% block script %}
+<script type="text/javascript">
+  console.log("{{csrf_token}}");
+</script>
+ {% endblock %}
+
+ </body>
+</html>

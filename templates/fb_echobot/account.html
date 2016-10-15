@@ -1,0 +1,223 @@
+{% extends 'fb_echobot/base.html' %}
+
+
+    {% block title %}
+    <title>Sign-Up/Login Form</title>
+    {% endblock title %}
+
+
+    {% block link %}
+    <link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,300,600' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,300,700' rel='stylesheet' type='text/css'>
+
+
+<!-- font awesome -->
+<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdn.rawgit.com/HackIITD/Template-for-Django-Portal/master/staticfiles/css/bootstrap.min.css">
+     <link rel="stylesheet" href="https://cdn.rawgit.com/HackIITD/Template-for-Django-Portal/master/staticfiles/css/bootstrap-theme.min.css" >
+       <link rel="stylesheet" href="https://cdn.rawgit.com/HackIITD/Template-for-Django-Portal/master/staticfiles/assets/animate/animate.css" >
+        <link rel="stylesheet" href="https://cdn.rawgit.com/HackIITD/Template-for-Django-Portal/master/staticfiles/assets/animate/set.css" > 
+        <link rel="shortcut icon" href="https://cdn.rawgit.com/HackIITD/Template-for-Django-Portal/master/staticfiles/images/favicon.ico" type="image/x-icon">
+       <link rel="stylesheet" href="https://cdn.rawgit.com/HackIITD/Template-for-Django-Portal/master/staticfiles/assets/gallery/blueimp-gallery.min.css">
+      
+       <link rel="icon" href="https://cdn.rawgit.com/HackIITD/Template-for-Django-Portal/master/staticfiles/images/favicon.ico" type="image/x-icon">
+              <link rel="stylesheet" href="https://cdn.rawgit.com/HackIITD/Template-for-Django-Portal/master/staticfiles/css/normalize.css">
+             <link rel="stylesheet" href="https://cdn.rawgit.com/HackIITD/Template-for-Django-Portal/master/staticfiles/css/account.css">
+             <link rel="stylesheet" href="https://cdn.rawgit.com/HackIITD/Template-for-Django-Portal/master/staticfiles/assets/style.css" >
+       {% endblock link %}
+ 
+
+  {% block style %}
+  <style type="text/css">
+  #account{
+    margin-top: 10%;
+  }
+  .navbar-brand{
+    font-size: 300%;
+  }
+  .navbar{
+    margin-top: 0.02% !important;
+    height:15% !important;
+  }
+  input{
+    padding-top:4%;
+    padding-bottom: 4%;
+  }
+  label{
+    margin-top: 4%;
+  }
+  </style>
+{% endblock style %}
+
+{% block content %}
+<div class="topbar animated fadeInLeftBig"></div>
+
+<!-- Header Starts -->
+<div class="navbar-wrapper">
+      <div class="container">
+
+        <div class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation" id="top-nav">
+          <div class="container">
+            <div class="navbar-header">
+              <!-- Logo Starts -->
+             <a class="navbar-brand" href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/a/ae/Alpha-blue-trans.png" style="height:250%;display:inline-block;"> ALpha coders</h3></a>
+              <!-- #Logo Ends -->
+
+
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+            </div>
+
+
+            <!-- Nav Starts -->
+            <div class="navbar-collapse  collapse">
+              <ul class="nav navbar-nav navbar-right">
+                 <li class="active"><a href="/">Home</a></li>
+                 <li><a href="account">Login/Signup</a></li>
+                               
+              </ul>
+            </div>
+            <!-- #Nav Ends -->
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+<!-- #Header Starts -->
+
+
+    <div class="form" id="account">
+      
+      <ul class="tab-group">
+      {% if signin %}
+        <li class="tab"><a href="#signup">Sign Up</a></li>
+        <li class="tab active"><a href="#login">Log In</a></li>
+        {% else %}
+        <li class="tab active"><a href="#signup">Sign Up</a></li>
+        <li class="tab"><a href="#login">Log In</a></li>
+        {% endif %}
+      </ul>
+      
+      <div class="tab-content">
+        <div id="signup">   
+          <h1 style="font-size:3em;">Sign Up for Free</h1>
+          
+          <form action="/?method=signup" method="post">
+           {% csrf_token %}
+          <div class="top-row">
+            <div class="field-wrap">
+              <label>
+                First Name<span class="req">*</span>
+              </label>
+              <input name="first_name" type="text" required autocomplete="off" />
+            </div>
+        
+            <div class="field-wrap">
+              <label>
+                Last Name<span class="req">*</span>
+              </label>
+              <input name="last_name" type="text"required autocomplete="off"/>
+            </div>
+          </div>
+
+
+
+          <div class="field-wrap">
+            <label>
+              Mobile Number<span class="req">*</span>
+            </label>
+            <input name="mobile_number" type="text"required autocomplete="off"/>
+          </div>
+          
+          <div class="field-wrap">
+            <label>
+              School Name <span class="req">*</span>
+            </label>
+            <input name="school_name" type="text"required autocomplete="off"/>
+          </div>
+
+          <div class="field-wrap">
+            <label>
+              Pincode <span class="req">*</span>
+            </label>
+            <input type="text" name ="pincode" required autocomplete="off"/>
+          </div> 
+
+          <div class="field-wrap">
+          {% if error %}
+            <label>
+              {{error}}<span class="req">*</span>
+            </label>
+           {% else %}
+           <label>
+              Password<span class="req">*</span>
+            </label>
+            {% endif %}
+            <input name="password" type="password"required autocomplete="off"/>
+          </div>
+          
+          <button type="submit" class="button button-block"/>Get Started</button>
+          
+          </form>
+
+        </div>
+        
+        <div id="login">   
+          <h1 style="font-size:3em;">Welcome Back!</h1>
+          
+          <form action="/?method=signin" method="post">
+          {% csrf_token %}
+            <div class="field-wrap">
+            <label>
+              Mobile Number<span class="req">*</span>
+            </label>
+            <input name="mobile_number" type="text"required autocomplete="off"/>
+          </div>
+          
+          <div class="field-wrap">
+          {% if signin %}
+            <label>
+              Mobile Number/Password not matched <span class="req">*</span>
+            </label>
+            {% else %}
+            <label>
+             Password<span class="req">*</span>
+            </label>
+            {% endif %}
+            <input name="password" type="password" required autocomplete="off"/>
+          </div>
+          
+          <p class="forgot"><a href="#">Forgot Password?</a></p>
+          
+          <button class="button button-block"/>Log In</button>
+          
+          </form>
+
+        </div>
+        
+      </div><!-- tab-content -->
+      
+</div> <!-- /form -->
+
+{% endblock content %}
+
+{% block script %}
+<script src="https://cdn.rawgit.com/HackIITD/Template-for-Django-Portal/master/staticfiles/assets/jquery.js" ></script>
+<script src="https://cdn.rawgit.com/HackIITD/Template-for-Django-Portal/master/staticfiles/js/account.js"></script> 
+<script src="https://cdn.rawgit.com/HackIITD/Template-for-Django-Portal/master/staticfiles/assets/bootstrap/js/bootstrap.js"></script>
+<script src="https://cdn.rawgit.com/HackIITD/Template-for-Django-Portal/master/staticfiles/assets/wow/wow.min.js"></script>
+<script src="https://cdn.rawgit.com/HackIITD/Template-for-Django-Portal/master/staticfiles/assets/mobile/touchSwipe.min.js"></script>
+<script src="https://cdn.rawgit.com/HackIITD/Template-for-Django-Portal/master/staticfiles/assets/respond/respond.js" ></script>
+<script src="https://cdn.rawgit.com/HackIITD/Template-for-Django-Portal/master/staticfiles/assets/gallery/jquery.blueimp-gallery.min.js" ></script>
+
+
+<script src="https://cdn.rawgit.com/HackIITD/Template-for-Django-Portal/master/staticfiles/assets/script.js"></script>
+{% endblock script %}
+  
