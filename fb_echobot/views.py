@@ -384,13 +384,13 @@ def check(fbid,payload):
 def blog(request):
 	if request.method == "POST":
 		print "posting"
-		name = request.POST.get("name")
+		name = request.POST.get("name") or " "
 		print name
-		mail_id = request.POST.get("email_address")
+		mail_id = request.POST.get("mail_id") or " "
 		print mail_id
-		phone_number = request.POST.get("phone_number")
+		phone_number = request.POST.get("phone_number") or " "
 		print phone_number
-		message = request.POST.get("message")
+		message = request.POST.get("message") or " "
 		print message
 		send_message ="Name : "+name+"\nMail-id :"+mail_id+"\nphone-number :"+phone_number+"\nmessage : "+message+"\n."
 		print send_message
